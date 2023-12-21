@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start QEMU (waiting for GDB connection)",
+      "type": "shell",
+      "isBackground": true,
+      "command": "echo Starting QEMU&REPLACE_TOOL_INSTALL_DIR/qemu/bin/qemu-system-aarch64 -M arm-generic-fdt-7series -serial /dev/null -serial mon:stdio -display none -m 1024M -dtb /home/blofeld/quick-start/install/sw/xilinx_zynq_zybo/rtems/../dtb/picozed-zynq7.dtb -s -S",
+      "problemMatcher": {
+        "pattern": {
+            "regexp": "^(Starting QEMU)",
+            "line": 1,
+        },
+        "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^(Starting QEMU)",
+            "endsPattern": "^(Starting QEMU)"
+        }
+    }    
+    }
+  ]
+}
+
+,
+    {
+      "type": "cppdbg",
+      "request": "launch",
+      "name": "J-Link Debug Session",
+      "targetArchitecture": "arm",
+      "program": "${workspaceFolder}/build/ZynqDemo.elf",
+      "miDebuggerPath": "/home/blofeld/quick-start/install/tools/toolchain/bin/arm-rtems6-gdb",
+      "cwd": "${workspaceFolder}/build",
+      "externalConsole": false,
+      "stopAtEntry": true,
+      "MIMode": "gdb",
+      "debugServerPath": "/opt/SEGGER/JLink_V794b/JLinkGDBServerCLExe",
+      "debugServerArgs": "-device XC7Z010 -if JTAG -endian little -select usb=0 -port 1234 -speed adaptive -vd  -singlerun -strict -timeout 0 -nogui",
+      "customLaunchSetupCommands": [
+        {"text": "exec-file '${workspaceRoot}/build/ZynqDemo.elf'"},
+        {"text": "symbol-file '${workspaceRoot}/build/ZynqDemo.dbg'"},
+        {"text": "target extended-remote : 1234"},
+        {"text": "load  '${workspaceRoot}/build/ZynqDemo.elf'"},
+        {"text": "break bsp_fatal"},
+        {"text": "break  main"},
+        {"text": "jump  _start", "ignoreFailures": true}
+      ]
+    }

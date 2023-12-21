@@ -1,0 +1,49 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "cppdbg",
+      "request": "launch",
+      "name": "QEMU Debug Session",
+      "targetArchitecture": "arm",
+      "program": "${workspaceFolder}/build/ZynqDemo.elf",
+      "miDebuggerPath": "REPLACE_TOOL_INSTALL_DIR/toolchain/bin/arm-rtems6-gdb",
+      "cwd": "${workspaceFolder}/build",
+      "externalConsole": false,
+      "stopAtEntry": true,
+      "MIMode": "gdb",
+      "customLaunchSetupCommands": [
+        {"text": "set breakpoint pending on"},
+        {"text": "exec-file '${workspaceRoot}/build/ZynqDemo.elf'"},
+        {"text": "symbol-file '${workspaceRoot}/build/ZynqDemo.dbg'"},
+        {"text": "target remote localhost:1234"},
+        {"text": "load  '${workspaceRoot}/build/ZynqDemo.elf'"},
+        {"text": "break  bsp_reset"}
+      ],
+      "preLaunchTask": "Start QEMU (waiting for GDB connection)"
+    },
+    {
+      "type": "cppdbg",
+      "request": "launch",
+      "name": "J-Link Debug Session",
+      "targetArchitecture": "arm",
+      "program": "${workspaceFolder}/build/ZynqDemo.elf",
+      "miDebuggerPath": "REPLACE_TOOL_INSTALL_DIR/toolchain/bin/arm-rtems6-gdb",
+      "cwd": "${workspaceFolder}/build",
+      "externalConsole": false,
+      "stopAtEntry": true,
+      "MIMode": "gdb",
+      "debugServerPath": "/opt/SEGGER/JLink_V794b/JLinkGDBServerCLExe",
+      "debugServerArgs": "-device XC7Z015 -if JTAG -endian little -select usb=0 -port 1234 -ir -vd -singlerun -strict -timeout 0 -nogui",
+      "customLaunchSetupCommands": [
+        {"text": "exec-file '${workspaceRoot}/build/ZynqDemo.elf'"},
+        {"text": "symbol-file '${workspaceRoot}/build/ZynqDemo.elf'"},
+        {"text": "target extended-remote : 1234"},
+        {"text": "load  '${workspaceRoot}/build/ZynqDemo.elf'"},
+        {"text": "break bsp_fatal"},
+        {"text": "break  main"},
+        {"text": "jump  _start", "ignoreFailures": true}
+      ],
+    }
+  ]
+}
