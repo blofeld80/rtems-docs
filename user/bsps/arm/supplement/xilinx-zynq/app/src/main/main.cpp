@@ -51,7 +51,7 @@ void thread_function(std::mutex &mtx, int32_t startup_delay){
   
   std::this_thread::sleep_for(std::chrono::milliseconds(startup_delay));
 
-  for (int32_t i=0; i<10; i++)
+  for (int32_t i=0; i<1000; i++)
   {
     mtx.lock();
     print_hello((int32_t) _SMP_Get_current_processor());
@@ -64,19 +64,12 @@ void thread_function(std::mutex &mtx, int32_t startup_delay){
 
 int main(int argc, char* argv[])
 {
-  /*
-  while(1)
-  {
-    std::cout << "Hello from CPU: " << std::to_string(1) << std::endl;
-
-  }
- */
   std::mutex mtx;
   std::vector<std::thread> threads(N_CPU);
 
   for (int32_t i = 0; i < N_CPU; i++) {
     threads[i] = std::thread(thread_function, std::ref(mtx), i * 500 );
-      /*
+      
       cpu_set_t cpuset;
       CPU_ZERO(&cpuset);
       CPU_SET(i, &cpuset);
@@ -84,8 +77,7 @@ int main(int argc, char* argv[])
                                       sizeof(cpu_set_t), &cpuset);
       if (rc != 0) {
         std::cout << "Error calling pthread_setaffinity_np: " << rc << std::endl;
-      }
-      */
+      }    
   }
 
   for (auto& t : threads) {

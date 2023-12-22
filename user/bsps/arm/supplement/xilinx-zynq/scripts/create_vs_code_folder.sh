@@ -112,6 +112,7 @@ cp -r ${VS_CODE_TEMPLATE} ${VS_CODE_DIR}
 
 sed -i "s;REPLACE_TOOL_INSTALL_DIR;${TOOL_INSTALL_DIR};g" ${VS_CODE_DIR}/tasks.json
 sed -i "s;REPLACE_BOARD_INSTALL_DIR;${BOARD_DIR};g" ${VS_CODE_DIR}/tasks.json
+sed -i "s;REPLACE_APP_DIR;${APP_DIR};g" ${VS_CODE_DIR}/tasks.json
 
 sed -i "s;REPLACE_TOOL_INSTALL_DIR;${TOOL_INSTALL_DIR};g" ${VS_CODE_DIR}/settings.json
 sed -i "s;REPLACE_BOARD_INSTALL_DIR;${BOARD_DIR};g" ${VS_CODE_DIR}/settings.json

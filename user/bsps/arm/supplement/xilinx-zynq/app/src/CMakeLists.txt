@@ -31,14 +31,14 @@ target_compile_options(${PROJECT_NAME}
   $<$<COMPILE_LANGUAGE:C>:$<$<CONFIG:MinSizeRel>:SHELL:${RTEMS_CMAKE_APPLICATION_C_FLAGS_MINSIZEREL}>>
 )
 
-#add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-#    COMMAND ${CMAKE_OBJCOPY}  $<TARGET_FILE:${PROJECT_NAME}> $<TARGET_FILE_BASE_NAME:${PROJECT_NAME}>.exe    
-#    COMMAND ${CMAKE_OBJCOPY} --only-keep-debug $<TARGET_FILE:${PROJECT_NAME}> $<TARGET_FILE_BASE_NAME:${PROJECT_NAME}>.dbg
-#    COMMAND ${CMAKE_OBJCOPY} --strip-unneeded $<TARGET_FILE:${PROJECT_NAME}>
-#    COMMAND ${CMAKE_OBJCOPY} --add-gnu-debuglink=$<TARGET_FILE_BASE_NAME:${PROJECT_NAME}>.dbg $<TARGET_FILE:${PROJECT_NAME}>
-#    WORKING_DIRECTORY $<TARGET_FILE_DIR:${PROJECT_NAME}>
-#    COMMENT "Splitting off debug symbols from ${PROJECT_NAME}"
-#)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY}  $<TARGET_FILE:${PROJECT_NAME}> $<TARGET_FILE_BASE_NAME:${PROJECT_NAME}>.exe    
+    COMMAND ${CMAKE_OBJCOPY} --only-keep-debug $<TARGET_FILE:${PROJECT_NAME}> $<TARGET_FILE_BASE_NAME:${PROJECT_NAME}>.dbg
+    COMMAND ${CMAKE_OBJCOPY} --strip-unneeded $<TARGET_FILE:${PROJECT_NAME}>
+    COMMAND ${CMAKE_OBJCOPY} --add-gnu-debuglink=$<TARGET_FILE_BASE_NAME:${PROJECT_NAME}>.dbg $<TARGET_FILE:${PROJECT_NAME}>
+    WORKING_DIRECTORY $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    COMMENT "Splitting off debug symbols from ${PROJECT_NAME}"
+)
 
 # if you use -G"Unix Makefiles" you'll receive a more verbose output, doesnt work well for ninja
 # call ninja -v to get more info
