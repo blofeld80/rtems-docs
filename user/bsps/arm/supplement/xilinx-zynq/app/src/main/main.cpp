@@ -51,7 +51,7 @@ void thread_function(std::mutex &mtx, int32_t startup_delay){
   
   std::this_thread::sleep_for(std::chrono::milliseconds(startup_delay));
 
-  for (int32_t i=0; i<1000; i++)
+  for (int32_t i=0; i<10; i++)
   {
     mtx.lock();
     print_hello((int32_t) _SMP_Get_current_processor());

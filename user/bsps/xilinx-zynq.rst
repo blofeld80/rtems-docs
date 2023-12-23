@@ -384,7 +384,7 @@ First of all, RTEMS and libBSD need to be build.
 
     cd ~/rtems-docs/user/bsps/arm/supplement/xilinx-zynq/scripts
 
-    # if you haven´t installed the tools
+    # if you have not installed the tools
     ./install_tools.sh
     # to get the XSA file
     ./build_hardware.sh -b Picozed-7015
@@ -526,6 +526,7 @@ Open VS Code and in the folder ``app``.
     code .
 
 #. If asked, do not agree to hide the activiybar
+#. If asked to select a kit, select "RTEMS" 
 #. If asked to "Configure Cmake Options Visibility" select yes and make sure they are not hidden
 #. If required, **Ctrl + Shift + P** → type "Kit" → Select a kit → use RTEMS
 #. Try to build the project by clicking on "build" in the lower option bar
@@ -553,8 +554,8 @@ The devicetree blob can be build using:
 .. code-block:: bash
     
     cd ~/rtems-docs/user/bsps/arm/supplement/xilinx-zynq/dts
-    mkdir ~/quick-start/install/sw/xilinx_zynq_zybo/dtb
-    ~/quick-start/install/tools/toolchain/bin/dtc  -I dts -O dtb -o ~/quick-start/install/sw/xilinx_zynq_zybo/dtb/picozed-zynq7.dtb picozed-zynq7.dts
+    mkdir ~/quick-start/install/sw/xilinx_zynq_picozed/dtb
+    ~/quick-start/install/tools/toolchain/bin/dtc  -I dts -O dtb -o ~/quick-start/install/sw/xilinx_zynq_picozed/dtb/picozed-zynq7.dtb picozed-zynq7.dts
 
 
 Now run the machine with (be aware that the app is configured to restart after finishing):
@@ -608,7 +609,7 @@ Now run the machine with (be aware that the app is configured to restart after f
 **NOTE:** To shutdown a QEMU machine use ``CTRL + A``, release the keys and hit ``X``.
 
 
-Of course the program can be debugged using QEMU. Set a breakpoint, open the "Run and Debug" tab and click the "Play" button.
+The program can be debugged in VS Code using QEMU. Set a breakpoint, open the "Run and Debug" tab, select "QEMU Debug Session" and click the "Play" button.
 
 .. image:: supplement/xilinx-zynq/img/DebugStart.png
    :width: 600

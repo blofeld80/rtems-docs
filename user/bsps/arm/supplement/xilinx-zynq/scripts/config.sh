@@ -31,19 +31,13 @@ RTEMS_TOOLCHAIN_INSTALL_DIR=${TOOL_INSTALL_DIR}/toolchain
 
 #################################################
 ## RTEMS
-RTEMS_OS_GIT_REPO=https://github.com/RTEMS/rtems.git
-RTEMS_OS_SRC_DIR=${TOP_SOURCE_DIR}/rtems
-RTEMS_OS_VER_COMMIT="3798c5735d005b5dcb0e835c9290d26412fe7a20"
-#RTEMS_OS_GIT_REPO=https://github.com/blofeld80/rtems
-#RTEMS_OS_VER_COMMIT="feature/allow_fpga_peripherals"
-RTEMS_OS_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems
 
-#################################################
-## QEMU
-QEMU_GIT_REPO=https://github.com/Xilinx/qemu.git
-QEMU_SRC_DIR=${TOP_SOURCE_DIR}/qemu
-QEMU_VER_COMMIT="xilinx_v2023.2"
-QEMU_INSTALL_DIR=${TOOL_INSTALL_DIR}/qemu
+RTEMS_OS_SRC_DIR=${TOP_SOURCE_DIR}/rtems
+#RTEMS_OS_GIT_REPO=https://github.com/RTEMS/rtems.git
+#RTEMS_OS_VER_COMMIT="3798c5735d005b5dcb0e835c9290d26412fe7a20"
+RTEMS_OS_GIT_REPO=https://github.com/blofeld80/rtems
+RTEMS_OS_VER_COMMIT="feature/extend_flashdev"
+RTEMS_OS_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems
 
 #################################################
 ## RTEMS Libbsd
@@ -51,6 +45,20 @@ RTEMS_LIBBSD_GIT_REPO=https://github.com/RTEMS/rtems-libbsd.git
 RTEMS_LIBBSD_SRC_DIR=${TOP_SOURCE_DIR}/rtems-libbsd
 RTEMS_LIBBSD_VER_COMMIT=e07b74b88af55df551046bd1beb775f843a96fe5
 RTEMS_LIBBSD_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems-libbsd
+
+#################################################
+## RTEMS lwip
+RTEMS_LWIP_GIT_REPO=https://github.com/blofeld80/rtems-lwip.git
+RTEMS_LWIP_SRC_DIR=${TOP_SOURCE_DIR}/rtems-lwip
+RTEMS_LWIP_VER_COMMIT="zynq7000"
+RTEMS_LWIP_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems-lwip
+
+#################################################
+## QEMU
+QEMU_GIT_REPO=https://github.com/Xilinx/qemu.git
+QEMU_SRC_DIR=${TOP_SOURCE_DIR}/qemu
+QEMU_VER_COMMIT="xilinx_v2023.2"
+QEMU_INSTALL_DIR=${TOOL_INSTALL_DIR}/qemu
 
 #################################################
 ## Eclipse
@@ -145,3 +153,4 @@ function git_clone_commit {
     popd
   fi
 } 
+

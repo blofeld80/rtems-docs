@@ -103,9 +103,9 @@ if [ ! -d "${TOP_DIR}" ]; then
   mkdir -p ${TOP_DIR}
 fi
 
-git_clone_commit "RTEMS"   ${RTEMS_OS_GIT_REPO}     ${RTEMS_OS_VER_COMMIT}     ${RTEMS_OS_SRC_DIR}  
-git_clone_commit "LIBBSD"  ${RTEMS_LIBBSD_GIT_REPO} ${RTEMS_LIBBSD_VER_COMMIT} ${RTEMS_LIBBSD_SRC_DIR} 
-
+git_clone_branch "RTEMS"   ${RTEMS_OS_GIT_REPO}     ${RTEMS_OS_VER_COMMIT}     ${RTEMS_OS_SRC_DIR}  
+#git_clone_commit "LIBBSD"  ${RTEMS_LIBBSD_GIT_REPO} ${RTEMS_LIBBSD_VER_COMMIT} ${RTEMS_LIBBSD_SRC_DIR} 
+git_clone_branch "LWIP"    ${RTEMS_LWIP_GIT_REPO}   ${RTEMS_LWIP_VER_COMMIT}  ${RTEMS_LWIP_SRC_DIR}  
 
 
 
@@ -121,29 +121,50 @@ if [ -d "${RTEMS_OS_INSTALL_DIR}" ]; then
 fi 
 
 
-if [ -d "${RTEMS_LIBBSD_INSTALL_DIR}" ]; then 
-  echo "Delete old Libbsd installation"	
-  rm -rf ${RTEMS_LIBBSD_INSTALL_DIR}
+#if [ -d "${RTEMS_LIBBSD_INSTALL_DIR}" ]; then 
+#  echo "Delete old Libbsd installation"	
+#  rm -rf ${RTEMS_LIBBSD_INSTALL_DIR}
+#fi 
+
+if [ -d "${RTEMS_LWIP_INSTALL_DIR}" ]; then 
+  echo "Delete old LWIP installation"	
+  rm -rf ${RTEMS_LWIP_INSTALL_DIR}
 fi 
 
 #################################################
-## Build RTEMS
+# Build RTEMS
 pushd ${RTEMS_OS_SRC_DIR}
 ./waf clean
 ./waf bspdefaults --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME} > config.ini
 sed -i 's/RTEMS_POSIX_API = False/RTEMS_POSIX_API = True/g' config.ini
 sed -i 's/RTEMS_SMP = False/RTEMS_SMP = True/g' config.ini
+sed -i 's/OPTIMIZATION_FLAGS = -O2 -g -fdata-sections -ffunction-section/OPTIMIZATION_FLAGS = -Og -g -fdata-sections -ffunction-section/g' config.ini
 ./waf configure --prefix=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME}
 ./waf install
 popd
 
 #################################################
 ## Build Libbsd
-pushd ${RTEMS_LIBBSD_SRC_DIR}
-sed -i 's#git://git.rtems.org/rtems_waf.git#https://git.rtems.org/rtems_waf#g' .gitmodules
+#pushd ${RTEMS_LIBBSD_SRC_DIR}
+#sed -i 's#git://git.rtems.org/rtems_waf.git#https://git.rtems.org/rtems_waf#g' .gitmodules
+#git submodule init
+#git submodule update rtems_waf
+#./waf clean
+#./waf configure --prefix=${RTEMS_LIBBSD_INSTALL_DIR} --rtems=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME} --buildset=buildset/default.ini
+#./waf install
+#popd
+
+
+#################################################
+## Build LWIP
+pushd ${RTEMS_LWIP_SRC_DIR}
+#sed -i 's#git://git.rtems.org/rtems_waf.git#https://git.rtems.org/rtems_waf#g' .gitmodules
+#sed -i 's#git://git.savannah.gnu.org/lwip.git.git#https://git.savannah.gnu.org/lwip.git#g' .gitmodules
 git submodule init
-git submodule update rtems_waf
+git submodule update
 ./waf clean
-./waf configure --prefix=${RTEMS_LIBBSD_INSTALL_DIR} --rtems=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME} --buildset=buildset/default.ini
+./waf configure --prefix=${RTEMS_LWIP_INSTALL_DIR} --rtems=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME}
 ./waf install
 popd
+
+
