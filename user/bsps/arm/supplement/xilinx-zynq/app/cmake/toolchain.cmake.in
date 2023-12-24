@@ -52,10 +52,11 @@ set(RTEMS_SPEC_FILE_OUT ${RTEMS_LIB_DIR}/rtems.spec)
 configure_file(${RTEMS_SPEC_FILE_IN} ${RTEMS_SPEC_FILE_OUT})
 
 
-set(RTEMS_FLAGS_LIST ${RTEMS_ABI_FLAGS_LIST} ${RTEMS_LIBBSD_FLAGS} -isystem${RTEMS_INC_DIR})
-set(RTEMS_LINK_FLAGS_LIST -B${RTEMS_LIB_DIR} ${RTEMS_LIBBSD_LINK_FLAGS} -specs=${RTEMS_SPEC_FILE_OUT} -Wl,--gc-sections)
+#set(RTEMS_FLAGS_LIST ${RTEMS_ABI_FLAGS_LIST} ${RTEMS_LIBBSD_FLAGS} -isystem${RTEMS_INC_DIR})
+#set(RTEMS_LINK_FLAGS_LIST -B${RTEMS_LIB_DIR} ${RTEMS_LIBBSD_LINK_FLAGS} -specs=${RTEMS_SPEC_FILE_OUT} -Wl,--gc-sections)
 
-
+set(RTEMS_FLAGS_LIST ${RTEMS_ABI_FLAGS_LIST} ${RTEMS_LWIP_FLAGS} -isystem${RTEMS_INC_DIR})
+set(RTEMS_LINK_FLAGS_LIST -B${RTEMS_LIB_DIR} ${RTEMS_LWIP_LINK_FLAGS} -specs=${RTEMS_SPEC_FILE_OUT} -Wl,--gc-sections)
 
 # Compile the init file if it has changed or the obj file does not exist
 set(RTEMS_INIT_C_FILE_OBJ "${RTEMS_LIB_DIR}/init_dummy.obj")
@@ -95,27 +96,27 @@ string (REPLACE ";" " " RTEMS_FLAGS "${RTEMS_FLAGS_LIST}")
 string (REPLACE ";" " " RTEMS_LINK_FLAGS "${RTEMS_LINK_FLAGS_LIST}")
 
 # Set up compiler and linker flags, inject user specified flags
-set(CMAKE_C_FLAGS                   "            ${RTEMS_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections " CACHE INTERNAL "c compiler flags")
+set(CMAKE_C_FLAGS                   "            ${RTEMS_FLAGS} ${RTEMS_LWIP_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections " CACHE INTERNAL "c compiler flags")
 set(CMAKE_C_FLAGS_DEBUG             "            -Og -g3" CACHE INTERNAL "c dbg compiler flags")
 set(CMAKE_C_FLAGS_RELEASE           "-DNDEBUG    -O2" CACHE INTERNAL "c rel compiler flags")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO    "-DNDEBUG    -O2 -g" CACHE INTERNAL "c relwithdbginfo compiler flags")
 set(CMAKE_C_FLAGS_MINSIZEREL        "-DNDEBUG    -Os" CACHE INTERNAL "c minsizerel compiler flags")
 
-set(CMAKE_CXX_FLAGS                 "            ${RTEMS_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections -std=gnu++14 " CACHE INTERNAL "cxx compiler flags")
+set(CMAKE_CXX_FLAGS                 "            ${RTEMS_FLAGS} ${RTEMS_LWIP_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections -std=gnu++14 " CACHE INTERNAL "cxx compiler flags")
 set(CMAKE_CXX_FLAGS_DEBUG           "            -Og -g3" CACHE INTERNAL "cxx dbg compiler flags")
 set(CMAKE_CXX_FLAGS_RELEASE         "-DNDEBUG    -O2" CACHE INTERNAL "cxx rel compiler flags")
 set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-DNDEBUG    -O2 -g" CACHE INTERNAL "cxx relwithdbginfo compiler flags")
 set(CMAKE_CXX_FLAGS_MINSIZEREL      "-DNDEBUG    -Os" CACHE INTERNAL "cxx minsizerel compiler flags")
 
-set(RTEMS_CMAKE_APPLICATION_C_FLAGS_DEBUG             "          ${RTEMS_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections  -Og -g3" CACHE INTERNAL "c dbg compiler flags")
-set(RTEMS_CMAKE_APPLICATION_C_FLAGS_RELEASE           "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections  -O2" CACHE INTERNAL "c rel compiler flags")
-set(RTEMS_CMAKE_APPLICATION_C_FLAGS_RELWITHDEBINFO    "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections  -O2 -g" CACHE INTERNAL "c relwithdbginfo compiler flags")
-set(RTEMS_CMAKE_APPLICATION_C_FLAGS_MINSIZEREL        "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections  -Os" CACHE INTERNAL "c minsizerel compiler flags")
+set(RTEMS_CMAKE_APPLICATION_C_FLAGS_DEBUG             "          ${RTEMS_FLAGS} ${RTEMS_LWIP_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections  -Og -g3" CACHE INTERNAL "c dbg compiler flags")
+set(RTEMS_CMAKE_APPLICATION_C_FLAGS_RELEASE           "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LWIP_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections  -O2" CACHE INTERNAL "c rel compiler flags")
+set(RTEMS_CMAKE_APPLICATION_C_FLAGS_RELWITHDEBINFO    "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LWIP_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections  -O2 -g" CACHE INTERNAL "c relwithdbginfo compiler flags")
+set(RTEMS_CMAKE_APPLICATION_C_FLAGS_MINSIZEREL        "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LWIP_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections  -Os" CACHE INTERNAL "c minsizerel compiler flags")
 
-set(RTEMS_CMAKE_APPLICATION_CXX_FLAGS_DEBUG           "          ${RTEMS_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections -std=gnu++14  -Og -g3" CACHE INTERNAL "cxx dbg compiler flags")
-set(RTEMS_CMAKE_APPLICATION_CXX_FLAGS_RELEASE         "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections -std=gnu++14  -O2" CACHE INTERNAL "cxx rel compiler flags")
-set(RTEMS_CMAKE_APPLICATION_CXX_FLAGS_RELWITHDEBINFO  "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections -std=gnu++14  -O2 -g" CACHE INTERNAL "cxx relwithdbginfo compiler flags")
-set(RTEMS_CMAKE_APPLICATION_CXX_FLAGS_MINSIZEREL      "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections -std=gnu++14  -Os" CACHE INTERNAL "cxx minsizerel compiler flags")
+set(RTEMS_CMAKE_APPLICATION_CXX_FLAGS_DEBUG           "          ${RTEMS_FLAGS} ${RTEMS_LWIP_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections -std=gnu++14  -Og -g3" CACHE INTERNAL "cxx dbg compiler flags")
+set(RTEMS_CMAKE_APPLICATION_CXX_FLAGS_RELEASE         "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LWIP_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections -std=gnu++14  -O2" CACHE INTERNAL "cxx rel compiler flags")
+set(RTEMS_CMAKE_APPLICATION_CXX_FLAGS_RELWITHDEBINFO  "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LWIP_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections -std=gnu++14  -O2 -g" CACHE INTERNAL "cxx relwithdbginfo compiler flags")
+set(RTEMS_CMAKE_APPLICATION_CXX_FLAGS_MINSIZEREL      "-DNDEBUG  ${RTEMS_FLAGS} ${RTEMS_LWIP_FLAGS} ${RTEMS_LIBBSD_FLAGS} -fdata-sections -ffunction-sections -std=gnu++14  -Os" CACHE INTERNAL "cxx minsizerel compiler flags")
 
 
 
