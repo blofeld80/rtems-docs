@@ -30,14 +30,18 @@ set(RTEMS_INC_DIR REPLACE_RTEMS_INC_DIR)
 set(RTEMS_LIB_DIR REPLACE_RTEMS_LIB_DIR)
 
 
-
-#if(EXISTS "${CMAKE_FIND_ROOT_PATH}/share/cmake/toolchain_libbsd.cmake")
+# do not link libbsd for now
+if(EXISTS "${CMAKE_FIND_ROOT_PATH}/share/cmake/toolchain_libbsd.cmake")
 #  include("${CMAKE_FIND_ROOT_PATH}/share/cmake/toolchain_libbsd.cmake")
 # libbsd is always there - per definition for this demo
   set(RTEMS_LIBBSD_ENABLED -lbsd)
   set(RTEMS_LIBBSD_FLAGS -isystemREPLACE_RTEMS_LIBBSD_INC_DIR)
   set(RTEMS_LIBBSD_LINK_FLAGS -BREPLACE_RTEMS_LIBBSD_LIB_DIR)
-#endif()
+endif()
+
+set(RTEMS_LWIP_ENABLED -llwip)
+set(RTEMS_LWIP_FLAGS -isystemREPLACE_RTEMS_LWIP_INC_DIR)
+set(RTEMS_LWIP_LINK_FLAGS -BREPLACE_RTEMS_LWIP_LIB_DIR)
 
 
 # We'll use spec files instead of -qrtems to have the same linker cmds no matter if libbsd is present or not

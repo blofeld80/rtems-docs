@@ -121,10 +121,10 @@ if [ -d "${RTEMS_OS_INSTALL_DIR}" ]; then
 fi 
 
 
-#if [ -d "${RTEMS_LIBBSD_INSTALL_DIR}" ]; then 
-#  echo "Delete old Libbsd installation"	
-#  rm -rf ${RTEMS_LIBBSD_INSTALL_DIR}
-#fi 
+if [ -d "${RTEMS_LIBBSD_INSTALL_DIR}" ]; then 
+  echo "Delete old Libbsd installation"	
+  rm -rf ${RTEMS_LIBBSD_INSTALL_DIR}
+fi 
 
 if [ -d "${RTEMS_LWIP_INSTALL_DIR}" ]; then 
   echo "Delete old LWIP installation"	
@@ -144,15 +144,15 @@ sed -i 's/OPTIMIZATION_FLAGS = -O2 -g -fdata-sections -ffunction-section/OPTIMIZ
 popd
 
 #################################################
-## Build Libbsd
-#pushd ${RTEMS_LIBBSD_SRC_DIR}
-#sed -i 's#git://git.rtems.org/rtems_waf.git#https://git.rtems.org/rtems_waf#g' .gitmodules
-#git submodule init
-#git submodule update rtems_waf
-#./waf clean
-#./waf configure --prefix=${RTEMS_LIBBSD_INSTALL_DIR} --rtems=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME} --buildset=buildset/default.ini
-#./waf install
-#popd
+# Build Libbsd
+pushd ${RTEMS_LIBBSD_SRC_DIR}
+sed -i 's#git://git.rtems.org/rtems_waf.git#https://git.rtems.org/rtems_waf#g' .gitmodules
+git submodule init
+git submodule update rtems_waf
+./waf clean
+./waf configure --prefix=${RTEMS_LIBBSD_INSTALL_DIR} --rtems=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME} --buildset=buildset/default.ini
+./waf install
+popd
 
 
 #################################################
