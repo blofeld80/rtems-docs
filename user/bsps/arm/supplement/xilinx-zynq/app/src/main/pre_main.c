@@ -41,6 +41,7 @@ int main(int argc, char* argv[]);
 
 void rtems_stack_checker_report_usage(void);
 
+
 void* POSIX_Init(void* p)
 {
   int argc = 1;
@@ -57,7 +58,7 @@ void* POSIX_Init(void* p)
 #define CONFIGURE_SCHEDULER_PRIORITY_AFFINITY_SMP
 #define CONFIGURE_MAXIMUM_PROCESSORS 2
 
-#define CONFIGURE_MAXIMUM_FILE_DESCRIPTORS 4
+#define CONFIGURE_MAXIMUM_FILE_DESCRIPTORS 8
 #define CONFIGURE_MAXIMUM_DRIVERS 4
 
 #define CONFIGURE_MAXIMUM_USER_EXTENSIONS 4

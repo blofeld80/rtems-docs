@@ -78,3 +78,47 @@ BSP_START_TEXT_SECTION void zynq_setup_mmu_and_cache(void)
   );
 }
 */
+
+#include <arch/sys_arch.h>
+#include <lwip/dhcp.h>
+#include <netstart.h>
+struct netif net_interface;
+
+void init_network(void)
+{
+  int ret;
+  ip_addr_t ipaddr, netmask, gw;
+    
+  IP_ADDR4( &ipaddr, 192, 168, 100, 236 );
+  IP_ADDR4( &netmask, 255, 255, 255, 0 );
+  IP_ADDR4( &gw, 0, 0, 0, 0 );
+  unsigned char mac_ethernet_address[] = { 0x00, 0x06, 0x77, 0x00, 0x00, 0x00 };
+  
+  /*
+  IP_ADDR4( &ipaddr, 10, 0, 2, 14 );
+  IP_ADDR4( &netmask, 255, 255, 255, 0 );
+  //IP_ADDR4( &gw, 10, 0, 2, 3 );
+  IP_ADDR4( &gw, 0, 0, 0, 0 );
+  unsigned char mac_ethernet_address[] = { 0x00, 0x06, 0x77, 0x00, 0x00, 0x00 };
+  //unsigned char mac_ethernet_address[] = { 0x00, 0x0a, 0x35, 0x00, 0x22, 0x01 };
+*/
+  netif_set_addr(&net_interface, (const ip4_addr_t*) &ipaddr, (const ip4_addr_t*) &netmask, (const ip4_addr_t*) &gw);
+
+
+  ret = start_networking(
+    &net_interface,
+    &ipaddr,
+    &netmask,
+    &gw,
+    mac_ethernet_address
+  );
+
+  if ( ret != 0 ) {
+    return;
+  }
+
+  //dhcp_start( &net_interface );
+
+
+
+}
