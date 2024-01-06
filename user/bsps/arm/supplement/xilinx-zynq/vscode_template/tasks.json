@@ -9,7 +9,7 @@
         "reveal": "always",
         "panel": "new"
       },
-      "command": "echo Starting QEMU&REPLACE_TOOL_INSTALL_DIR/qemu/bin/qemu-system-aarch64 -M arm-generic-fdt-7series -serial /dev/null -serial mon:stdio -display none -m 1024M -dtb REPLACE_TOOL_INSTALL_DIR/../sw/xilinx_zynq_picozed/dtb/picozed-zynq7.dtb -kernel REPLACE_APP_DIR/build/ZynqDemo.elf -s -S",
+      "command": "echo Starting QEMU&REPLACE_TOOL_INSTALL_DIR/qemu/bin/qemu-system-aarch64 -M arm-generic-fdt-7series -serial /dev/null -serial mon:stdio -display none -m 1024M -dtb REPLACE_TOOL_INSTALL_DIR/../sw/xilinx_zynq_picozed/dtb/picozed-zynq7.dtb -kernel REPLACE_APP_DIR/build/ZynqDemo.elf -net nic,netdev=eth0 -netdev user,id=eth0,hostfwd=tcp:127.0.0.1:2112-192.168.100.236:2112,net=192.168.100.0/24 -s -S",
       "problemMatcher": {
         "pattern": {
             "regexp": "^(Starting QEMU)",

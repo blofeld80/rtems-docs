@@ -132,6 +132,7 @@ void tcp_server_function(void){
 
   // This send() function sends the 13 bytes of the string to the new socket
   const char hello[] = "Hello, client!\r\n";
+  const char bye[] = "Goodbye, client!\r\n";
   send(newsockfd, &hello, sizeof(hello), 0);
 
   bzero(buffer,256);
@@ -154,7 +155,9 @@ void tcp_server_function(void){
 
 
   }
-  
+
+  send(newsockfd, &bye, sizeof(bye), 0);
+  sleep(2);
   close(newsockfd);
   close(sockfd);
 
@@ -174,10 +177,16 @@ void init_network(void);
 #endif
 
 
-
+#include <rtems/thread.h>
 
 int main(int argc, char* argv[])
 {
+  
+  rtems_recursive_mutex mutex;
+  char mtx_name[] = "asdsadaddssad";
+
+  rtems_recursive_mutex_init( &mutex, (const char*) &mtx_name);
+
   std::mutex mtx;
   std::vector<std::thread> threads(N_CPU+1);
   init_network();

@@ -36,7 +36,7 @@ RTEMS_OS_SRC_DIR=${TOP_SOURCE_DIR}/rtems
 #RTEMS_OS_GIT_REPO=https://github.com/RTEMS/rtems.git
 #RTEMS_OS_VER_COMMIT="3798c5735d005b5dcb0e835c9290d26412fe7a20"
 RTEMS_OS_GIT_REPO=https://github.com/blofeld80/rtems
-RTEMS_OS_VER_COMMIT="feature/extend_flashdev"
+RTEMS_OS_VER_COMMIT="feature/contrib"
 RTEMS_OS_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems
 
 #################################################
@@ -50,7 +50,7 @@ RTEMS_LIBBSD_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems-libbsd
 ## RTEMS lwip
 RTEMS_LWIP_GIT_REPO=https://github.com/blofeld80/rtems-lwip.git
 RTEMS_LWIP_SRC_DIR=${TOP_SOURCE_DIR}/rtems-lwip
-RTEMS_LWIP_VER_COMMIT="zynq7000"
+RTEMS_LWIP_VER_COMMIT="feature/add_zynq7000_final"
 RTEMS_LWIP_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems-lwip
 
 #################################################
