@@ -12,10 +12,19 @@ set(CMAKE_CXX_FLAGS ""  CACHE INTERNAL "c++ flags" FORCE)
 
 
 add_executable(${PROJECT_NAME} 
-  ${CMAKE_CURRENT_LIST_DIR}/main/main.cpp
-  ${CMAKE_CURRENT_LIST_DIR}/main/pre_main.c
-  ${CMAKE_CURRENT_LIST_DIR}/main/mmu.c
-)
+  #p1
+  #${CMAKE_CURRENT_LIST_DIR}/main/main.cpp
+  #${CMAKE_CURRENT_LIST_DIR}/main/pre_main.c
+  #${CMAKE_CURRENT_LIST_DIR}/main/mmu.c
+  # p2
+  #/home/blofeld/quick-start/src/rtems/testsuites/libtests/flashdev01/init.c
+  #/home/blofeld/quick-start/src/rtems/testsuites/libtests/flashdev01/test_flashdev.c
+  /home/blofeld/quick-start/src/rtems/testsuites/fstests/fslfs01/init.c
+  /home/blofeld/quick-start/src/rtems/testsuites/libtests/flashdev01/test_flashdev.c
+  
+  )
+target_include_directories(${PROJECT_NAME} PUBLIC "/home/blofeld/quick-start/src/rtems/testsuites/support/include")
+target_link_libraries(${PROJECT_NAME}  rtemstest lfs)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS ${RTEMS_CMAKE_APPLICATION_EXE_LINKER_FLAGS})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 14)

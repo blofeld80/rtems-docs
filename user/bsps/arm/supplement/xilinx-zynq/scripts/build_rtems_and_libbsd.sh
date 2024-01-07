@@ -138,6 +138,8 @@ pushd ${RTEMS_OS_SRC_DIR}
 ./waf bspdefaults --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME} > config.ini
 sed -i 's/RTEMS_POSIX_API = False/RTEMS_POSIX_API = True/g' config.ini
 sed -i 's/RTEMS_SMP = False/RTEMS_SMP = True/g' config.ini
+sed -i 's/BUILD_TESTS = False/BUILD_TESTS = True/g' config.ini
+sed -i 's/BUILD_LIBTESTS = False/BUILD_LIBTESTS = True/g' config.ini
 sed -i 's/OPTIMIZATION_FLAGS = -O2 -g -fdata-sections -ffunction-section/OPTIMIZATION_FLAGS = -Og -g -fdata-sections -ffunction-section/g' config.ini
 ./waf configure --prefix=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME}
 ./waf install
