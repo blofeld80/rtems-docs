@@ -131,6 +131,7 @@ if [ -d "${RTEMS_LWIP_INSTALL_DIR}" ]; then
   rm -rf ${RTEMS_LWIP_INSTALL_DIR}
 fi 
 
+
 #################################################
 # Build RTEMS
 pushd ${RTEMS_OS_SRC_DIR}
@@ -138,8 +139,20 @@ pushd ${RTEMS_OS_SRC_DIR}
 ./waf bspdefaults --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME} > config.ini
 sed -i 's/RTEMS_POSIX_API = False/RTEMS_POSIX_API = True/g' config.ini
 sed -i 's/RTEMS_SMP = False/RTEMS_SMP = True/g' config.ini
-sed -i 's/BUILD_TESTS = False/BUILD_TESTS = True/g' config.ini
-sed -i 's/BUILD_LIBTESTS = False/BUILD_LIBTESTS = True/g' config.ini
+#sed -i 's/BUILD_TESTS = False/BUILD_TESTS = True/g' config.ini
+#sed -i 's/BUILD_LIBTESTS = False/BUILD_LIBTESTS = True/g' config.ini
+#sed -i 's/BUILD_ADATESTS = False/BUILD_ADATESTS = True/g' config.ini
+#sed -i 's/BUILD_BENCHMARKS = False/BUILD_BENCHMARKS = True/g' config.ini
+#sed -i 's/BUILD_FSTESTS = False/BUILD_FSTESTS = True/g' config.ini
+#sed -i 's/BUILD_MPTESTS = False/BUILD_MPTESTS = True/g' config.ini
+#sed -i 's/BUILD_PSXTESTS = False/BUILD_PSXTESTS = True/g' config.ini
+#sed -i 's/BUILD_PSXTMTESTS = False/BUILD_PSXTMTESTS = True/g' config.ini
+#sed -i 's/BUILD_RHEALSTONE = False/BUILD_RHEALSTONE = True/g' config.ini
+#sed -i 's/BUILD_SPTESTS = False/BUILD_SPTESTS = True/g' config.ini
+#sed -i 's/BUILD_UNITTESTS = False/BUILD_UNITTESTS = True/g' config.ini
+#sed -i 's/BUILD_VALIDATIONTESTS = False/BUILD_VALIDATIONTESTS = True/g' config.ini
+#sed -i 's/BSP_PRESS_KEY_FOR_RESET = 0/BSP_PRESS_KEY_FOR_RESET = 1/g' config.ini
+
 sed -i 's/OPTIMIZATION_FLAGS = -O2 -g -fdata-sections -ffunction-section/OPTIMIZATION_FLAGS = -Og -g -fdata-sections -ffunction-section/g' config.ini
 ./waf configure --prefix=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME}
 ./waf install
@@ -156,7 +169,7 @@ popd
 #./waf install
 #popd
 
-
+ 
 #################################################
 ## Build LWIP
 pushd ${RTEMS_LWIP_SRC_DIR}

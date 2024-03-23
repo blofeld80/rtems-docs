@@ -23,38 +23,38 @@ git_clone_commit "RSB"   ${RTEMS_RSB_GIT_REPO} ${RTEMS_RSB_VER_COMMIT} ${RTEMS_R
 #################################################
 ## Build tools
 
-if [ ! -d "${QEMU_INSTALL_DIR}" ]; then 
-  echo ""
-  echo "###############################################################################"
-  echo "Build and install Xilinx QEMU"
-  echo "###############################################################################"
-  echo ""
-  pushd ${QEMU_SRC_DIR}
-  if [ -d "${QEMU_SRC_DIR}/build" ]; then 
-    rm -rf ${QEMU_SRC_DIR}/build
-  fi
-  mkdir ${QEMU_SRC_DIR}/build
-  pushd ${QEMU_SRC_DIR}/build
-  ../configure  --target-list="aarch64-softmmu microblazeel-softmmu" --prefix=${QEMU_INSTALL_DIR}
-  make -j $(nproc)
-  make install -j 1
-  popd
-  popd
-fi
-
-if [ ! -d "${OPENOCD_INSTALL_DIR}" ]; then 
-  echo ""
-  echo "###############################################################################"
-  echo "Build and install OpenOCD"
-  echo "###############################################################################"
-  echo ""
-  pushd ${OPENOCD_SRC_DIR}
-  ./bootstrap 
-  ./configure --enable-jlink --enable-ftdi --enable-dummy --enable-rshim --enable-ftdi  --enable-stlink  --enable-ti-icdi --enable-ulink --enable-usb-blaster-2 --enable-ft232r  --enable-vsllink --enable-xds110  --enable-cmsis-dap-v2  --enable-osbdm --enable-opendous  --enable-armjtagew --enable-rlink --enable-usbprog --enable-esp-usb-jtag  --enable-cmsis-dap --enable-nulink  --enable-kitprog --enable-usb-blaster --enable-presto  --enable-openjtag  --enable-buspirate --enable-jlink --enable-aice --enable-jtag_vpi  --enable-vdebug  --enable-jtag_dpi  --enable-amtjtagaccel  --enable-bcm2835gpio --enable-imx_gpio  --enable-remote-bitbang --prefix=${OPENOCD_INSTALL_DIR}
-  make -j $(nproc)
-  make install -j 1
-  popd
-fi
+#if [ ! -d "${QEMU_INSTALL_DIR}" ]; then 
+#  echo ""
+#  echo "###############################################################################"
+#  echo "Build and install Xilinx QEMU"
+#  echo "###############################################################################"
+#  echo ""
+#  pushd ${QEMU_SRC_DIR}
+#  if [ -d "${QEMU_SRC_DIR}/build" ]; then 
+#    rm -rf ${QEMU_SRC_DIR}/build
+#  fi
+#  mkdir ${QEMU_SRC_DIR}/build
+#  pushd ${QEMU_SRC_DIR}/build
+#  ../configure  --target-list="aarch64-softmmu microblazeel-softmmu" --prefix=${QEMU_INSTALL_DIR}
+#  make -j $(nproc)
+#  make install -j 1
+#  popd
+#  popd
+#fi
+#
+#if [ ! -d "${OPENOCD_INSTALL_DIR}" ]; then 
+#  echo ""
+#  echo "###############################################################################"
+#  echo "Build and install OpenOCD"
+#  echo "###############################################################################"
+#  echo ""
+#  pushd ${OPENOCD_SRC_DIR}
+#  ./bootstrap 
+#  ./configure --enable-jlink --enable-ftdi --enable-dummy --enable-rshim --enable-ftdi  --enable-stlink  --enable-ti-icdi --enable-ulink --enable-usb-blaster-2 --enable-ft232r  --enable-vsllink --enable-xds110  --enable-cmsis-dap-v2  --enable-osbdm --enable-opendous  --enable-armjtagew --enable-rlink --enable-usbprog --enable-esp-usb-jtag  --enable-cmsis-dap --enable-nulink  --enable-kitprog --enable-usb-blaster --enable-presto  --enable-openjtag  --enable-buspirate --enable-jlink --enable-aice --enable-jtag_vpi  --enable-vdebug  --enable-jtag_dpi  --enable-amtjtagaccel  --enable-bcm2835gpio --enable-imx_gpio  --enable-remote-bitbang --prefix=${OPENOCD_INSTALL_DIR}
+#  make -j $(nproc)
+#  make install -j 1
+#  popd
+#fi
 
 
 #if [ ! -d "${ECLIPSE_INSTALL_DIR}" ]; then 
@@ -85,3 +85,4 @@ if [ ! -d "${RTEMS_TOOLCHAIN_INSTALL_DIR}" ]; then
   ../source-builder/sb-set-builder --prefix=${RTEMS_TOOLCHAIN_INSTALL_DIR} 6/rtems-${RTEMS_BSP_ARCH}
   popd
 fi
+
