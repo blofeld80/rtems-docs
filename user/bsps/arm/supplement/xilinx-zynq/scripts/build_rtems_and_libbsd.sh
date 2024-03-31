@@ -103,7 +103,7 @@ if [ ! -d "${TOP_DIR}" ]; then
   mkdir -p ${TOP_DIR}
 fi
 
-git_clone_branch "RTEMS"   ${RTEMS_OS_GIT_REPO}     ${RTEMS_OS_VER_COMMIT}     ${RTEMS_OS_SRC_DIR}  
+git_clone_commit "RTEMS"   ${RTEMS_OS_GIT_REPO}     ${RTEMS_OS_VER_COMMIT}     ${RTEMS_OS_SRC_DIR}  
 git_clone_commit "LIBBSD"  ${RTEMS_LIBBSD_GIT_REPO} ${RTEMS_LIBBSD_VER_COMMIT} ${RTEMS_LIBBSD_SRC_DIR} 
 git_clone_branch "LWIP"    ${RTEMS_LWIP_GIT_REPO}   ${RTEMS_LWIP_VER_COMMIT}  ${RTEMS_LWIP_SRC_DIR}  
 
