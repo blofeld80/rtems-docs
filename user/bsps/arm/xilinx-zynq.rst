@@ -534,8 +534,8 @@ Open VS Code and in the folder ``app``.
 .. image:: supplement/xilinx-zynq/img/vscode_view_1.png
    :width: 600
 
-QEMU Debug Session
-~~~~~~~~~~~~~~~~~~
+Xilinx QEMU Debug Session
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Contrary to the next chapter, this one will use a devicetree based machine. 
 Xilinx proposes to use the machine ``arm-generic-fdt-7series`` (`LINK <https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/821854273/Running+Bare+Metal+Applications+on+QEMU#RunningBareMetalApplicationsonQEMU-Runningabare-metalapplicationonZynq7000>`_). 
