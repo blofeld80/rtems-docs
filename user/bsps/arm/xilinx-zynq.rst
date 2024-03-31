@@ -80,6 +80,7 @@ On Ubuntu 20.04 / 22.04, prepare the machine using:
 In addition to that, install: 
 
 #. `Xilinx 2021.2 Vivado / Vitis tools <https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html>`_
+#. `Xilinx 2023.2 QEMU <https://github.com/Xilinx/qemu>`_
 #. `VS Code <https://code.visualstudio.com/>`_ or Eclipse Embedded (commented out in `install_tools.sh`)
 #. `Segger J-Link Software <https://www.segger.com/downloads/jlink/>`_ if you plan to use J-Link 
 #. `Xilinx Cable Drivers <https://docs.xilinx.com/r/en-US/ug973-vivado-release-notes-install-license/Install-Cable-Drivers>`_ if you want to use OpenOCD
