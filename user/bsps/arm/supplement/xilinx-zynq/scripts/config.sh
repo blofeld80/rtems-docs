@@ -33,10 +33,8 @@ RTEMS_TOOLCHAIN_INSTALL_DIR=${TOOL_INSTALL_DIR}/toolchain
 ## RTEMS
 
 RTEMS_OS_SRC_DIR=${TOP_SOURCE_DIR}/rtems
-#RTEMS_OS_GIT_REPO=https://github.com/RTEMS/rtems.git
-#RTEMS_OS_VER_COMMIT="3798c5735d005b5dcb0e835c9290d26412fe7a20"
-RTEMS_OS_GIT_REPO=https://github.com/blofeld80/rtems
-RTEMS_OS_VER_COMMIT="feature/littlefs"
+RTEMS_OS_GIT_REPO=https://github.com/RTEMS/rtems.git
+RTEMS_OS_VER_COMMIT="3798c5735d005b5dcb0e835c9290d26412fe7a20"
 RTEMS_OS_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems
 
 #################################################
@@ -48,10 +46,10 @@ RTEMS_LIBBSD_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems-libbsd
 
 #################################################
 ## RTEMS lwip
-RTEMS_LWIP_GIT_REPO=https://github.com/blofeld80/rtems-lwip.git
-RTEMS_LWIP_SRC_DIR=${TOP_SOURCE_DIR}/rtems-lwip
-RTEMS_LWIP_VER_COMMIT="feature/add_zynq7000_final"
-RTEMS_LWIP_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems-lwip
+#RTEMS_LWIP_GIT_REPO=https://github.com/blofeld80/rtems-lwip.git
+#RTEMS_LWIP_SRC_DIR=${TOP_SOURCE_DIR}/rtems-lwip
+#RTEMS_LWIP_VER_COMMIT="feature/add_zynq7000_final"
+#RTEMS_LWIP_INSTALL_DIR=${SW_INSTALL_DIR}/${RTEMS_BSP_NAME}/rtems-lwip
 
 #################################################
 ## QEMU
@@ -59,13 +57,6 @@ QEMU_GIT_REPO=https://github.com/Xilinx/qemu.git
 QEMU_SRC_DIR=${TOP_SOURCE_DIR}/qemu
 QEMU_VER_COMMIT="xilinx_v2023.2"
 QEMU_INSTALL_DIR=${TOOL_INSTALL_DIR}/qemu
-
-#################################################
-## Eclipse
-ECLIPSE_INSTALL_DIR=${TOOL_INSTALL_DIR}/eclipse
-ECLIPSE_SRC_DIR=${TOP_SOURCE_DIR}/eclipse
-ECLIPSE_SRC_REPO=http://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/2023-09/R/
-ECLIPSE_TAR_NAME=eclipse-embedcpp-2023-09-R-linux-gtk-x86_64.tar.gz
 
 #################################################
 ## OpenOCD
