@@ -160,24 +160,24 @@ popd
 
 #################################################
 # Build Libbsd
-#pushd ${RTEMS_LIBBSD_SRC_DIR}
-#sed -i 's#git://git.rtems.org/rtems_waf.git#https://git.rtems.org/rtems_waf#g' .gitmodules
-#git submodule init
-#git submodule update rtems_waf
-#./waf clean
-#./waf configure --prefix=${RTEMS_LIBBSD_INSTALL_DIR} --rtems=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME} --buildset=buildset/default.ini
-#./waf install
-#popd
+pushd ${RTEMS_LIBBSD_SRC_DIR}
+sed -i 's#git://git.rtems.org/rtems_waf.git#https://git.rtems.org/rtems_waf#g' .gitmodules
+git submodule init
+git submodule update rtems_waf
+./waf clean
+./waf configure --prefix=${RTEMS_LIBBSD_INSTALL_DIR} --rtems=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME} --buildset=buildset/default.ini
+./waf install
+popd
 
  
 #################################################
 ## Build LWIP
-pushd ${RTEMS_LWIP_SRC_DIR}
-git submodule init
-git submodule update
-./waf clean
-./waf configure --prefix=${RTEMS_LWIP_INSTALL_DIR} --rtems=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME}
-./waf install
-popd
+#pushd ${RTEMS_LWIP_SRC_DIR}
+#git submodule init
+#git submodule update
+#./waf clean
+#./waf configure --prefix=${RTEMS_LWIP_INSTALL_DIR} --rtems=${RTEMS_OS_INSTALL_DIR} --rtems-tools=${RTEMS_TOOLCHAIN_INSTALL_DIR} --rtems-bsps=${RTEMS_BSP_ARCH}/${RTEMS_BSP_NAME}
+#./waf install
+#popd
 
 
